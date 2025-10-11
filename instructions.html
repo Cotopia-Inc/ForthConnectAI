@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Advanced Guide — Forth Connect AI (Cotopia)</title>
+  <link rel="shortcut icon" href="/Forth Connection/images/a50a74b3-88f9-4937-ba0c-670d111e371a-1_all_21781.webp" />
+  <style>
+    :root{--bg:#0f1720;--card:#0b1220;--muted:#9aa8bf;--accent:#60a5fa;--glass: rgba(255,255,255,0.03)}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      background:linear-gradient(180deg,#071025 0%, #071629 50%, #041024 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      padding:28px;
+    }
+    .wrap{max-width:980px;margin:0 auto}
+    header{display:flex;align-items:baseline;gap:18px;margin-bottom:18px}
+    header h1{margin:0;font-size:20px;letter-spacing:-0.2px}
+    header p{margin:0;color:var(--muted);font-size:13px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:20px;border-radius:12px;box-shadow:0 6px 30px rgba(2,6,23,0.6); margin-bottom:18px}
+    h2{margin:6px 0 12px 0;font-size:16px}
+    h3{margin:14px 0 8px 0;font-size:14px}
+    p{margin:8px 0;color:var(--muted);line-height:1.45}
+    ul{margin:8px 0 16px 20px;color:var(--muted)}
+    code{background:var(--glass);padding:2px 6px;border-radius:6px;color:#dff; font-family:ui-monospace,Menlo,monospace;font-size:13px}
+    pre{background:#071426;padding:12px;border-radius:8px;overflow:auto;color:#bfe8ff;font-size:13px}
+    .two{display:grid;grid-template-columns:1fr 300px;gap:16px}
+    .sidebar{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));padding:12px;border-radius:10px}
+    .muted{color:var(--muted);font-size:13px}
+    footer{color:var(--muted);font-size:13px;text-align:center;margin-top:18px}
+    a{color:var(--accent);text-decoration:none}
+    li + li{margin-top:6px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>Advanced Guide — Forth Connect AI (Cotopia)</h1>
+        <p>Complete, practical instructions for preparing, packaging and selling the Forth Connect AI game template with pay-to-play/web3 integration.</p>
+      </div>
+    </header>
+
+    <div class="card">
+      <h2>Overview</h2>
+      <p>This guide adapts the advanced checklist into an actionable manual tailored for Cotopia's product "Forth Connect AI". Use it to prepare a commercial template (frontend + smart contract) you can sell, demo, and support professionally.</p>
+    </div>
+
+    <section class="two">
+      <div>
+        <div class="card" id="product-definition">
+          <h2>1) Product definition & SKUs</h2>
+          <p>Decide what you will ship. Recommended full package contents for Forth Connect AI:</p>
+          <ul>
+            <li><strong>Frontend</strong>: `index.html`, `payments.js` (ESM/UMD), CSS, optimized assets, game files</li>
+            <li><strong>Contracts</strong>: `contracts/PayToPlay.sol`, Hardhat/Foundry project files, ABIs</li>
+            <li><strong>Build & deploy</strong>: `package.json`, deploy scripts, `.env.example`</li>
+            <li><strong>Docs & demos</strong>: README, QUICKSTART, demo site, screencast</li>
+            <li><strong>Extras</strong>: unit tests, CI config, admin tools, license & terms</li>
+          </ul>
+          <h3>Editions</h3>
+          <ul>
+            <li>Lite (free): frontend demo, mock token</li>
+            <li>Pro: full template + deploy scripts + 30-day support</li>
+            <li>Enterprise: custom integration, audit assistance</li>
+          </ul>
+        </div>
+
+        <div class="card" id="codebase">
+          <h2>2) Preparing the codebase</h2>
+          <h3>Structure & DX</h3>
+          <ul>
+            <li>Make `payments.js` modular: export an `init(config)` function that references Forth Connect AI UI hooks.</li>
+            <li>Provide `config.example.json` / `.env.example` for easy setup and include Cotopia branding assets.</li>
+            <li>Offer both ESM and UMD builds (Vite/Rollup). Provide a script tag friendly bundle for quick demo hosting.</li>
+          </ul>
+          <h3>Testing & CI</h3>
+          <ul>
+            <li>Contract tests: buyPlays, consumePlay, setPrice, withdraw, edge cases.</li>
+            <li>Frontend E2E tests (Playwright/Cypress) running the Forth Connect AI flows against a local Hardhat node or fork.</li>
+            <li>GitHub Actions to run tests, lint, and build on PRs.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="security">
+          <h2>3) Security & audits</h2>
+          <ul>
+            <li>Use OpenZeppelin and SafeERC20 wrappers for token interactions.</li>
+            <li>Run static tools: Slither, MythX, Solhint. Add Echidna/Foundry fuzzing where possible.</li>
+            <li>Include ReentrancyGuard and owner checks. Consider timelock for critical admin ops like setPrice/withdraw.</li>
+            <li>Provide test coverage and recommend a third-party audit if templates will be deployed with real funds.</li>
+            <li>Publish responsible disclosure and consider a bug bounty program for Cotopia deployments.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="legal">
+          <h2>4) Legal, licensing & compliance</h2>
+          <ul>
+            <li>Choose a license: MIT (permissive) or proprietary commercial license for paid templates from Cotopia.</li>
+            <li>Include `TERMS_OF_SALE` and an EULA that disclaims financial liability (consult counsel).</li>
+            <li>Ensure third-party assets are licensed for resale; include attributions and Cotopia branding rules.</li>
+            <li>Handle taxes (VAT, sales tax) — use Stripe/Paddle/Gumroad which assist with VAT compliance.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="deployment">
+          <h2>5) Deployment & delivery workflows</h2>
+          <h3>Contract deployment</h3>
+          <ul>
+            <li>Provide Hardhat scripts targeting Ethereum, Polygon, Arbitrum, Optimism and testnets used in demos.</li>
+            <li>Include recommended optimizer settings and gas tips in Cotopia docs.</li>
+          </ul>
+          <h3>Delivery methods</h3>
+          <ul>
+            <li>Downloadable ZIP, Gumroad/Stripe, PayPal Email, or npm package for `payments.js` with Cotopia namespace.</li>
+            <li>Provide `setup.sh` / `npm run setup` to populate `.env`, install deps, compile, and optionally deploy.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="monetization">
+          <h2>6) Monetization models & pricing</h2>
+          <ul>
+            <li>One-time license: Lite / Pro / Enterprise tiering under Cotopia branding.</li>
+            <li>Subscription for updates/support. Offer hosted analytics or revenue-share if Cotopia provides hosting.</li>
+            <li>Paid add-ons: audits, customizations, white-labeling, Cotopia support packages.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="checkout">
+          <h2>7) Checkout & license delivery</h2>
+          <ul>
+            <li>Fiat: Stripe, PayPal, Vemo, Paddle, Gumroad — handle receipts & taxes for Cotopia sales.</li>
+            <li>Crypto: Coinbase Commerce or on-chain invoices (stablecoin recommended).</li>
+            <li>License keys: generate per-purchase keys and optionally a simple Cotopia license server for updates.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="marketing">
+          <h2>8) Marketing & product page</h2>
+          <ul>
+            <li>Product page: hero with "Forth Connect AI by Cotopia", demo link, screencast, feature list (web3 integration, admin panel, tests, docs).</li>
+            <li>Create tutorials: "Deploy Forth Connect AI to Polygon + USDC" and share on dev communities.</li>
+            <li>Promote on r/ethdev, Discord, Product Hunt, and Cotopia channels.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="support">
+          <h2>9) Support, maintenance & updates</h2>
+          <ul>
+            <li>Offer support tiers: community, Pro (30 days), Enterprise (SLA + custom work) under Cotopia branding.</li>
+            <li>Use semantic versioning, changelog, and publish security patches promptly.</li>
+            <li>Provide migration & multisig instructions for production customers of Forth Connect AI.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="analytics">
+          <h2>10) Analytics & monitoring</h2>
+          <ul>
+            <li>Index on-chain events (Purchased, Redeemed) with a Node indexer or TheGraph and provide example Cotopia dashboard.</li>
+            <li>Offer optional hosted monitoring as a Cotopia service.</li>
+            <li>Frontend analytics optional and privacy-aware (opt-out).</li>
+          </ul>
+        </div>
+
+        <div class="card" id="ops">
+          <h2>11) Operational security recommendations</h2>
+          <ul>
+            <li>Never embed private keys in frontend. Use deployer keys in `.env` and CI secret stores.</li>
+            <li>Recommend owner multisig (Gnosis Safe) for production deployments of Cotopia templates.</li>
+            <li>Advise using stablecoins and document token-decimal pitfalls and fee-on-transfer tokens.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="deliverables">
+          <h2>12) Deliverables & pre-list checklist</h2>
+          <ul>
+            <li>Packaged template, README, quickstart, Guide, Advance Guide, deploy scripts, ABIs, demo site, screencast, LICENSE, TERMS_OF_SALE branded for Cotopia.</li>
+            <li>Tests passing in CI, demo deployed on testnet, documentation complete.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="onboarding">
+          <h2>13) Example onboarding & support emails</h2>
+          <p class="muted">Provide templates in the `support/` folder for purchase confirmation, onboarding steps, and refund requests; include Cotopia contact info.</p>
+          <pre>
+Purchase confirmation:
+- Download link
+- Quickstart: install deps, set .env, deploy to testnet, paste contract address
+- Demo link + Cotopia support contact
+          </pre>
+        </div>
+
+        <div class="card" id="pricing-example">
+          <h2>14) Pricing examples & revenue math</h2>
+          <ul>
+            <li>Pro: $79 — sell 100/month → $7,900 gross (minus fees & costs).</li>
+            <li>Offer Pro+ ($149) with extra assets and longer support.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="roadmap">
+          <h2>15) Roadmap & product improvements</h2>
+          <ul>
+            <li>Short term: EIP-2612 permit, multi-token support, localization for Forth Connect AI.</li>
+            <li>Mid term: white-label services, hosted analytics dashboard under Cotopia.</li>
+            <li>Long term: plugin marketplace for templates & Cotopia ecosystem.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="techstack">
+          <h2>16) Recommended tech stack & resources</h2>
+          <ul>
+            <li>Contracts: Solidity + OpenZeppelin + Hardhat/Foundry; security tools: Slither, MythX, Echidna.</li>
+            <li>Frontend: Ethers v6; Vite + React (optional) or vanilla ESM for simplicity.</li>
+            <li>CI: GitHub Actions. Hosting: Vercel/Netlify/GitHub Pages.</li>
+            <li>Payments: Stripe/Paddle/Gumroad; crypto: Coinbase Commerce.</li>
+          </ul>
+        </div>
+
+        <div class="card" id="risks">
+          <h2>17) Quick risk checklist (warn buyers)</h2>
+          <ul>
+            <li>Fee-on-transfer tokens break exact-price logic.</li>
+            <li>Decimals mismatch causes price problems — always test with same decimals.</li>
+            <li>Gas spikes affect UX; expose gas-estimates and warnings.</li>
+            <li>Single-owner keys are risky — recommend multisig.</li>
+          </ul>
+        </div>
+      </div>
+
+      <aside class="sidebar card">
+        <h3>Fast Actionables</h3>
+        <ul>
+          <li>Create `payments.js` ESM with `init(config)` and export UMD build.</li>
+          <li>Add Hardhat tests and run Slither; include results in repo.</li>
+          <li>Prepare `config.example.json` and `setup.sh` to speed onboarding for Cotopia customers.</li>
+          <li>Host live demo on testnet & publish screencast of Forth Connect AI.</li>
+          <li>Decide license & include `TERMS_OF_SALE`.</li>
+        </ul>
+
+        <h3>Admin & Security Tips</h3>
+        <ul>
+          <li>Recommend replacing owner with a Gnosis Safe after deploy.</li>
+          <li>Use SafeERC20 to handle non-standard tokens.</li>
+          <li>Consider timelock for setPrice/withdraw for transparency.</li>
+        </ul>
+
+        <h3>Want Cotopia-branded deliverables?</h3>
+        <p class="muted">I can generate:</p>
+        <ul>
+          <li>`payments.js` ESM + UMD build customized for Forth Connect AI.</li>
+          <li>Packaged repo skeleton with README, Cotopia branding, and deploy scripts.</li>
+          <li>Product page copy + screenshot suggestions featuring Forth Connect AI.</li>
+          <li>Draft commercial license & TERMS tailored for Cotopia (not legal advice).</li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="card">
+      <h2>Appendix — Quickstart (5-minute)</h2>
+      <ol>
+        <li>Clone Cotopia's repo and copy `.env.example` → `.env`. Set RPC_URL and PRIVATE_KEY (use testnet key).</li>
+        <li>npm i, then <code>npx hardhat compile</code>.</li>
+        <li>Deploy to testnet with provided script: <code>npx hardhat run scripts/deploy.js --network goerli</code>.</li>
+        <li>Update `config.js` or `index.html` with deployed contract address and token address (test ERC-20).</li>
+        <li>Open demo, connect wallet, test approve → buy → start round flows for Forth Connect AI.</li>
+      </ol>
+
+      <h3>Recommended verification steps</h3>
+      <ul>
+        <li>Verify contract source on block explorer.</li>
+        <li>Run a small manual end-to-end test: purchase 1 play, consumePlay, confirm events and balances.</li>
+        <li>Replace owner with multisig (Gnosis Safe) before production.</li>
+      </ul>
+    </div>
+
+    <footer>
+      <div>Prepared by Cotopia (Wyoming, USA) • Support: support@cotopia.org<br>Version 1.0 — Last updated: Oct. 2025</div>
+    </footer>
+  </div>
+</body>
+</html>
